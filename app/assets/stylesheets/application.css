@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: sans-serif
+}
+
+div#top-navigation { height: 5%; font-size: 24px; border-bottom: 1px solid #CCCCCC }
+div#top-navigation ul li { list-style: none; display: inline-block; padding-right: 10% }
