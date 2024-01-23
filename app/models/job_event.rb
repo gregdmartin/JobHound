@@ -1,3 +1,3 @@
 class JobEvent < ApplicationRecord
-  # TODO: model event types
+  belongs_to :job_position
 end

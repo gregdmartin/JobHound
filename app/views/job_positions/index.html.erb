@@ -7,17 +7,41 @@
 <% if @job_positions.blank? %>
   <h3>No Positions are present with any events. Add one!
 <% else %>
-  <% @job_positions.each do |position| %>
-    <ul class="position_container">
-      <li class="position">
-        <h4>
-          <% if position.job_link.blank? %>
-            <%= position.title %>
-          <% else %>
-            <a href="<%= position.job_link %>" target="_blank"><%= position.title %></a>
-          <% end %>
-        </h4>
-      </li>
-    </ul>
-  <% end %>
+  <table>
+    <thead>
+      <th>Company</th>
+      <th>Position</th>
+      <th>Interest Level</th>
+    </thead>
+    <tbody>
+      <% @job_positions.each do |position| %>
+        <tr class="position_row">
+          <td class="position_company">
+            <% if position.company.website_url.blank? %>
+              <%= position.company.name %>
+            <% else %>
+              <a href="<%= position.company.website_url%>", target="_blank"><%= position.company.name %></a>
+            <% end %>
+          </td>
+
+          <td class="position_title">
+            <% title_string = position.title + (position.domain.blank? ? '' : " (#{position.domain})") %>
+            <% if position.job_link.blank? %>
+              <%= title_string %>
+            <% else %>
+              <a href="<%= position.job_link %>" target="_blank"><%= title_string %></a>
+            <% end %>
+          </td>
+
+          <td class="position_interest">
+            <% if position.interest_level.blank? %>
+              unset
+            <% else %>
+              <%= position.interest_level.to_i %>/5
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

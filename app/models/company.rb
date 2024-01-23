@@ -1,3 +1,3 @@
 class Company < ApplicationRecord
-  # currently empty; there's nothing to do with this data yet
+  has_many :job_positions
 end

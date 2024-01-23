@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_194736) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_23_215401) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -42,7 +42,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_194736) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "domain"
+    t.datetime "posted_on"
+    t.decimal "interest_level", precision: 5, scale: 2
     t.index ["company_id"], name: "index_job_positions_on_company_id"
+    t.index ["interest_level"], name: "index_job_positions_on_interest_level"
     t.index ["status"], name: "index_job_positions_on_status"
   end
 
