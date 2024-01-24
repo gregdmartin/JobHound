@@ -2,4 +2,4 @@
   <h3>No Positions are present with any events. Add one!</h3>
 <% end %>
 
-<%= react_component("JobPositionsDashboard", {positions: @job_positions}) %>
+<div id="root" data-job-positions="<%= @job_positions.to_json %>"></div>

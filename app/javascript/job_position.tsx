@@ -1,5 +1,8 @@
-const JobPositionsDashboard = props => {
-  let positionsContainer = '';
+import React from 'react';
+
+export function JobPositionsDashboard(props) {
+  console.log("position 1: ", props.positions[0]);
+  let positionsContainer;
   if(props.positions.length !== 0) {
     let positionRows = props.positions.map(position => {
       return positionRowElement(position);
@@ -29,7 +32,7 @@ const JobPositionsDashboard = props => {
   );
 }
 
-positionRowElement = position => {
+function positionRowElement(position) {
   let company = position.company.website_url === null ? position.company.name : <a href={position.company.website_url} target="_blank">{position.company.name}</a>;
   let positionTitle = position.title + (position.domain === null ? '' : ` (${position.domain})`);
   let positionFragment = position.job_link === null ? positionTitle : <a href={position.job_link} target="_blank">{positionTitle}</a>;
