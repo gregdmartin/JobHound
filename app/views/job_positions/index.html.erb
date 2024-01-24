@@ -1,6 +1,5 @@
-<%
-  job_positions_map = @job_positions.map do |p|
-    p.attributes.merge({company: p.company.attributes})
-  end
-%>
-<%= react_component("JobPositionsDashboard", {positions: job_positions_map}) %>
+<% if @job_positions.blank? %>
+  <h3>No Positions are present with any events. Add one!</h3>
+<% end %>
+
+<%= react_component("JobPositionsDashboard", {positions: @job_positions}) %>
