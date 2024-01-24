@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { JobPosition, getJobPositions } from './JobPositionService';
 
-export function JobPositionsDashboard(props) {
-  console.log("position 1: ", props.positions[0]);
+export function JobPositionsDashboard() {
+  const [loaded, setLoaded] = useState<boolean>(false)
+  const [positions, setPositions] = useState<Array<JobPosition>>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      setPositions(await getJobPositions());
+      setLoaded(true);
+    }
+    fetchData();
+  }, []);
+
   let positionsContainer;
-  if(props.positions.length !== 0) {
-    let positionRows = props.positions.map(position => {
+  if(!loaded) {
+    return <p>Loading...</p>
+  } else if (positions.length === 0) {
+    return <h3>No Positions are present with any events. Add one!</h3>
+  } else {
+    let positionRows = positions.map(position => {
       return positionRowElement(position);
     });
 
@@ -22,14 +36,14 @@ export function JobPositionsDashboard(props) {
         </tbody>
       </table>
     );
-  }
 
-  return (
-    <div>
-      <button>Add Position</button>
-      {positionsContainer}
-    </div>
-  );
+    return (
+      <div>
+        <button>Add Position</button>
+        {positionsContainer}
+      </div>
+    );
+  }
 }
 
 function positionRowElement(position) {
